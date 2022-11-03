@@ -22,7 +22,7 @@
                 $tmp = $_FILES['contact_image']['tmp_name'];
                 $path = $path.strtolower($file_name); 
                 $phonebook->contact_image = $file_name;
-                $response = $phonebook->save_phonebook();
+               
                 
                 if(!$response['error']) {
                     if(!empty(@$response['contact_image'])) {
@@ -32,6 +32,7 @@
                     move_uploaded_file($tmp,$path);
                 }
             }   
+            $response = $phonebook->save_phonebook();
             header("Location:".base_url());
             exit;
         }

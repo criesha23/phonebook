@@ -123,7 +123,10 @@
 		
 		
 		function conatact_display_image(cellvalue, options, rowObject) {
-			var imageHtml = "<img src='public/images/" + cellvalue + "' originalValue='" + cellvalue + "' height='100'/>";
+			var imageHtml = "";
+			if (cellvalue != ''){
+				imageHtml = "<img src='public/images/" + cellvalue + "' originalValue='" + cellvalue + "' height='100'/>";
+			}
 			return imageHtml;
 		}; 
 
@@ -178,7 +181,7 @@
 
 							<div class="form-group">
 								<label for="txt_email">Photo</label>
-								<input type="file" id="contact_image" name="contact_image" accept="image/jpeg,image/png" required>
+								<input type="file" id="contact_image" name="contact_image" accept="image/jpeg,image/png">
 							</div>
 							<input type="hidden" name="action" value="save"/>
 							<input type="text" id="contact_id" name="contact_id" value="" style="display:none" />							
