@@ -51,13 +51,7 @@
                     empty($this->contact_email)) {
                         throw new Exception(REQUIRED_FIELD);
                 }
-                echo "INSERT INTO tbl_contacts(
-                    contact_name, contact_company, contact_phone,
-                    contact_address, contact_email, contact_image
-                )  VALUES(
-                    '$this->contact_name', '$this->contact_company', '$this->contact_phone',
-                    '$this->contact_address', '$this->contact_email', '$this->contact_image')";
-                    
+               
                 if(empty($this->contact_id)) {
                     $query = $this->db->query("INSERT INTO tbl_contacts(
                             contact_name, contact_company, contact_phone,
@@ -74,13 +68,15 @@
                     return array('error'=>false, 'message' => SUCCESS);
 
                 } else {
-                    // $contact_row = $this->db->query("SELECT contact_image FROM tbl_contacts WHERE tbl_contacts.ID='$this->ID'");
-                    // $contact_row = $this->first_row($contact_row);
                     $image = $this->contact_image;
+                    $image_update_sql="";
+                    if($image != ''){
+                        $image_update_sql=", contact_image = '$this->contact_image' ";
+                    }
                     $query = $this->db->query("UPDATE tbl_contacts SET
                         contact_name = '$this->contact_name', contact_company = '$this->contact_company',
                         contact_phone = '$this->contact_phone', contact_address = '$this->contact_address',
-                        contact_email = '$this->contact_email', contact_image = '$this->contact_image'
+                        contact_email = '$this->contact_email' ".$image_update_sql."
                         WHERE contact_id ='$this->contact_id' ");
 
                     if(!$query) {
